@@ -1,0 +1,1085 @@
+{
+    "functions": [
+        {
+            "name": "setTreasuryAddress",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "treasuryAddress",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setDomainPrice",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "priceSats",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "mintDomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "airdropDomains",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "entries",
+                    "type": [
+                        "STRING",
+                        "UINT64",
+                        "ADDRESS"
+                    ]
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "update",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "sourceAddress",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "updateCalldata",
+                    "type": "BYTES"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "onOP20Received",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "operator",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "from",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "data",
+                    "type": "BYTES"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "selector",
+                    "type": "BYTES4"
+                }
+            ]
+        },
+        {
+            "name": "setMotoTokenAddress",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "tokenAddress",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setMotoTierPrice",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "tier",
+                    "type": "UINT8"
+                },
+                {
+                    "name": "price",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setMotoBasePrice",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "price",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setMotoEnabled",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "enabled",
+                    "type": "BOOL"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getMotoTierPrice",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "tier",
+                    "type": "UINT8"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "price",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "getMotoBasePriceView",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "price",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "getMotoTokenAddressView",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "tokenAddress",
+                    "type": "ADDRESS"
+                }
+            ]
+        },
+        {
+            "name": "withdrawOP20",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "token",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "success",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "registerDomainWithMoto",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "renewDomainWithMoto",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "reserveDomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "completeRegistration",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "renewDomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "initiateTransfer",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "newOwner",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "acceptTransfer",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "cancelTransfer",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "transferDomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "newOwner",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "transferDomainBySignature",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "ownerAddress",
+                    "type": "BYTES32"
+                },
+                {
+                    "name": "ownerTweakedPublicKey",
+                    "type": "BYTES32"
+                },
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "newOwner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "deadline",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "signature",
+                    "type": "BYTES"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "createSubdomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "parentDomain",
+                    "type": "STRING"
+                },
+                {
+                    "name": "subdomainLabel",
+                    "type": "STRING"
+                },
+                {
+                    "name": "subdomainOwner",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "deleteSubdomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "parentDomain",
+                    "type": "STRING"
+                },
+                {
+                    "name": "subdomainLabel",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setContenthashCIDv0",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                },
+                {
+                    "name": "cid",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setContenthashCIDv1",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                },
+                {
+                    "name": "cid",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setContenthashIPNS",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                },
+                {
+                    "name": "ipnsId",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setContenthashSHA256",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                },
+                {
+                    "name": "hash",
+                    "type": "BYTES32"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "clearContenthash",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setTTL",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                },
+                {
+                    "name": "ttl",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "getDomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "exists",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "createdAt",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "expiresAt",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "ttl",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "isActive",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "inGracePeriod",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "getSubdomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "fullName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "exists",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "parentHash",
+                    "type": "BYTES32"
+                },
+                {
+                    "name": "ttl",
+                    "type": "UINT64"
+                }
+            ]
+        },
+        {
+            "name": "getContenthash",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "hashType",
+                    "type": "UINT8"
+                },
+                {
+                    "name": "hashData",
+                    "type": "BYTES32"
+                },
+                {
+                    "name": "hashString",
+                    "type": "STRING"
+                }
+            ]
+        },
+        {
+            "name": "resolve",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "name",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                }
+            ]
+        },
+        {
+            "name": "getPendingTransfer",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "pendingOwner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "initiatedAt",
+                    "type": "UINT64"
+                }
+            ]
+        },
+        {
+            "name": "getTreasuryAddress",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "treasuryAddress",
+                    "type": "STRING"
+                }
+            ]
+        },
+        {
+            "name": "getDomainPrice",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "totalPriceSats",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "auctionPriceSats",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "renewalPerYear",
+                    "type": "UINT64"
+                }
+            ]
+        },
+        {
+            "name": "getBaseDomainPrice",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "priceSats",
+                    "type": "UINT64"
+                }
+            ]
+        },
+        {
+            "name": "getDomainNonce",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "nonce",
+                    "type": "UINT256"
+                }
+            ]
+        },
+        {
+            "name": "getReservation",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "reserver",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "reservedAt",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "isActive",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "getDomainsByOwner",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "offset",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "limit",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "total",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "keys",
+                    "type": "ARRAY_OF_BYTES"
+                },
+                {
+                    "name": "names",
+                    "type": "ARRAY_OF_STRING"
+                }
+            ]
+        }
+    ],
+    "events": [
+        {
+            "name": "TreasuryChanged",
+            "values": [
+                {
+                    "name": "previousAddressHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "newAddressHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "DomainPriceChanged",
+            "values": [
+                {
+                    "name": "oldPrice",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "newPrice",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "DomainRegistered",
+            "values": [
+                {
+                    "name": "domainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "ContractUpdated",
+            "values": [
+                {
+                    "name": "address",
+                    "type": "ADDRESS"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "DomainRenewed",
+            "values": [
+                {
+                    "name": "domainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "newExpiry",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "DomainReserved",
+            "values": [
+                {
+                    "name": "domainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "reserver",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "DomainTransferInitiated",
+            "values": [
+                {
+                    "name": "domainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "currentOwner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "newOwner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "DomainTransferCompleted",
+            "values": [
+                {
+                    "name": "domainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "previousOwner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "newOwner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "DomainTransferCancelled",
+            "values": [
+                {
+                    "name": "domainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "SubdomainCreated",
+            "values": [
+                {
+                    "name": "parentDomainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "subdomainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "owner",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "SubdomainDeleted",
+            "values": [
+                {
+                    "name": "parentDomainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "subdomainHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "ContenthashChanged",
+            "values": [
+                {
+                    "name": "nameHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "contenthashType",
+                    "type": "UINT8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "ContenthashCleared",
+            "values": [
+                {
+                    "name": "nameHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        },
+        {
+            "name": "TTLChanged",
+            "values": [
+                {
+                    "name": "nameHash",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "oldTTL",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "newTTL",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "UINT64"
+                }
+            ],
+            "type": "Event"
+        }
+    ]
+}

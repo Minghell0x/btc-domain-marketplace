@@ -1,0 +1,463 @@
+{
+    "functions": [
+        {
+            "name": "_listDomain",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "btcPriceSats",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "motoPrice",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "sellerBtcAddress",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_cancelListing",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_reservePurchase",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_completePurchase",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_buyWithMoto",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "onOP20Received",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "operator",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "from",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "amount",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "data",
+                    "type": "BYTES"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "selector",
+                    "type": "BYTES4"
+                }
+            ]
+        },
+        {
+            "name": "_setTreasuryAddress",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "newAddress",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_setFeeRate",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "bps",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_setMotoTokenAddress",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "tokenAddress",
+                    "type": "ADDRESS"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_withdrawMotoFees",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "_getListing",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "exists",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "seller",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "btcPrice",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "motoPrice",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "sellerBtcAddress",
+                    "type": "STRING"
+                },
+                {
+                    "name": "isReserved",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "_getReservation",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "buyer",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "reservedAtBlock",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "isActive",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "_getTreasuryAddress",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "treasuryAddress",
+                    "type": "STRING"
+                }
+            ]
+        },
+        {
+            "name": "_getFeeRate",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "feeRate",
+                    "type": "UINT64"
+                }
+            ]
+        },
+        {
+            "name": "_getMotoTokenAddress",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "name": "tokenAddress",
+                    "type": "ADDRESS"
+                }
+            ]
+        },
+        {
+            "name": "_makeOffer",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "btcAmount",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "motoAmount",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "expiryBlocks",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "offerIndex",
+                    "type": "UINT64"
+                }
+            ]
+        },
+        {
+            "name": "_cancelOffer",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "offerIndex",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_acceptOffer",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "offerIndex",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_getOffer",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "offerIndex",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "buyer",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "btcAmount",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "motoAmount",
+                    "type": "UINT256"
+                },
+                {
+                    "name": "expiryBlock",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "isActive",
+                    "type": "BOOL"
+                },
+                {
+                    "name": "isMotoLocked",
+                    "type": "BOOL"
+                }
+            ]
+        },
+        {
+            "name": "_getOfferCount",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "count",
+                    "type": "UINT64"
+                }
+            ]
+        },
+        {
+            "name": "_registerDomainBtcReserve",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_registerDomainBtcComplete",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_registerDomainMoto",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "motoResolverPrice",
+                    "type": "UINT256"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "_getPendingRegistration",
+            "type": "Function",
+            "payable": false,
+            "onlyOwner": false,
+            "inputs": [
+                {
+                    "name": "domainName",
+                    "type": "STRING"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "buyer",
+                    "type": "ADDRESS"
+                },
+                {
+                    "name": "years",
+                    "type": "UINT64"
+                },
+                {
+                    "name": "isActive",
+                    "type": "BOOL"
+                }
+            ]
+        }
+    ],
+    "events": []
+}
