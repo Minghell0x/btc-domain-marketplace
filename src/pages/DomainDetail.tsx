@@ -9,12 +9,14 @@ import { OfferRow } from '../components/domain/OfferRow';
 import { useWallet } from '../contexts/WalletContext';
 import { useContracts } from '../contexts/ContractContext';
 import { fetchListing, fetchOffers, fetchReservation } from '../services/MarketplaceService';
-import { lookupDomain } from '../services/ResolverService';
+import { lookupDomain, fetchDomainPrice } from '../services/ResolverService';
 import { formatAddress, formatDate, daysUntilBlock, formatBtcPrice } from '../utils/formatting';
 import { DEFAULT_OFFER_EXPIRY_BLOCKS } from '../config/constants';
-import type { Listing, DomainInfo, Offer, Reservation } from '../types';
+import type { Listing, DomainInfo, DomainPrice, Offer, Reservation } from '../types';
 
 type PageStatus = 'loading' | 'ready' | 'error' | 'not-found';
+
+const YEAR_OPTIONS = [1, 2, 3, 5, 10];
 
 export function DomainDetail(): ReactElement {
     const { name } = useParams<{ name: string }>();
@@ -28,6 +30,12 @@ export function DomainDetail(): ReactElement {
     const [domain, setDomain] = useState<DomainInfo | null>(null);
     const [offers, setOffers] = useState<Offer[]>([]);
     const [reservation, setReservation] = useState<Reservation | null>(null);
+
+    // Unregistered domain state (pricing from resolver)
+    const [isUnregistered, setIsUnregistered] = useState(false);
+    const [resolverPrice, setResolverPrice] = useState<DomainPrice | null>(null);
+    const [regYears, setRegYears] = useState(1);
+    const [priceLoading, setPriceLoading] = useState(false);
 
     // Offer form state
     const [offerBtcAmount, setOfferBtcAmount] = useState('');
@@ -57,13 +65,29 @@ export function DomainDetail(): ReactElement {
                 setListing(listingResult.value);
             }
             if (domainResult.status === 'fulfilled') {
-                if (!domainResult.value.exists) {
-                    setStatus('not-found');
+                if (!domainResult.value.exists || !domainResult.value.isActive) {
+                    // Domain not registered — fetch pricing from resolver
+                    setIsUnregistered(true);
+                    try {
+                        const price = await fetchDomainPrice(domainName, 1);
+                        setResolverPrice(price);
+                    } catch {
+                        // pricing fetch may fail, that's ok
+                    }
+                    setStatus('ready');
                     return;
                 }
                 setDomain(domainResult.value);
             } else {
-                setStatus('not-found');
+                // Lookup failed — domain likely doesn't exist, fetch pricing
+                setIsUnregistered(true);
+                try {
+                    const price = await fetchDomainPrice(domainName, 1);
+                    setResolverPrice(price);
+                } catch {
+                    // ok
+                }
+                setStatus('ready');
                 return;
             }
             if (offersResult.status === 'fulfilled') {
@@ -93,6 +117,20 @@ export function DomainDetail(): ReactElement {
         if (domain?.isActive) return 'active';
         return 'available';
     }
+
+    // Year change for unregistered domain pricing
+    const handleRegYearChange = useCallback(async (y: number) => {
+        setRegYears(y);
+        setPriceLoading(true);
+        try {
+            const price = await fetchDomainPrice(domainName, y);
+            setResolverPrice(price);
+        } catch {
+            // ok
+        } finally {
+            setPriceLoading(false);
+        }
+    }, [domainName]);
 
     // Action handlers (placeholder - will be wired to write services)
     function handleBuyBtc(): void {
@@ -135,19 +173,6 @@ export function DomainDetail(): ReactElement {
         );
     }
 
-    // --- Not Found ---
-    if (status === 'not-found') {
-        return (
-            <PageContainer>
-                <div className="flex flex-col items-center justify-center py-32 gap-6">
-                    <DomainName name={domainName} size="lg" />
-                    <p className="text-on-surface-muted text-lg">This domain does not exist or has not been registered.</p>
-                    <Link to="/register" className="btn-primary">Register this domain</Link>
-                </div>
-            </PageContainer>
-        );
-    }
-
     // --- Error ---
     if (status === 'error') {
         return (
@@ -161,7 +186,95 @@ export function DomainDetail(): ReactElement {
         );
     }
 
-    // --- Ready ---
+    // --- Ready: Unregistered Domain ---
+    if (isUnregistered) {
+        return (
+            <PageContainer>
+                <div className="max-w-2xl mx-auto animate-fade-in">
+                    {/* Header */}
+                    <div className="flex flex-col items-center text-center gap-4 mb-8 pt-8">
+                        <DomainName name={domainName} size="xl" />
+                        <DomainBadge status="available" />
+                        <p className="text-on-surface-muted text-sm">
+                            This domain is available for registration.
+                        </p>
+                    </div>
+
+                    {/* Pricing from Resolver */}
+                    <div className="card p-6 mb-6 glow-border">
+                        <h3 className="label mb-4">Registration Price</h3>
+                        <p className="text-on-surface-muted text-xs mb-4">
+                            Price set by the BtcNameResolver contract.
+                        </p>
+
+                        {/* Year selector */}
+                        <div className="mb-6">
+                            <p className="text-on-surface-muted text-xs mb-3">Registration Period</p>
+                            <div className="flex gap-2">
+                                {YEAR_OPTIONS.map((y) => (
+                                    <button
+                                        key={y}
+                                        onClick={() => void handleRegYearChange(y)}
+                                        className={`px-4 py-2 rounded-full text-sm font-mono transition-colors ${
+                                            regYears === y
+                                                ? 'bg-primary/10 text-primary border border-primary/20'
+                                                : 'bg-surface-container text-on-surface-muted border border-outline hover:text-on-surface'
+                                        }`}
+                                    >
+                                        {y}y
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Price breakdown */}
+                        {priceLoading ? (
+                            <div className="flex items-center gap-2 py-4">
+                                <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                                <span className="text-on-surface-muted text-xs font-mono">Fetching price...</span>
+                            </div>
+                        ) : resolverPrice ? (
+                            <div className="rounded-lg bg-surface-container-low p-4 mb-6">
+                                <div className="flex flex-col gap-2">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-on-surface-muted text-xs">Base Price ({regYears} year{regYears > 1 ? 's' : ''})</span>
+                                        <span className="font-mono text-sm text-on-surface">{formatBtcPrice(resolverPrice.totalPriceSats)}</span>
+                                    </div>
+                                    {resolverPrice.auctionPriceSats > 0n && (
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-on-surface-muted text-xs">Auction Premium</span>
+                                            <span className="font-mono text-sm text-accent">{formatBtcPrice(resolverPrice.auctionPriceSats)}</span>
+                                        </div>
+                                    )}
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-on-surface-muted text-xs">Renewal / Year</span>
+                                        <span className="font-mono text-sm text-on-surface-variant">{formatBtcPrice(resolverPrice.renewalPerYear)}</span>
+                                    </div>
+                                    <div className="border-t border-outline-variant my-1" />
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-on-surface text-xs font-semibold">Total</span>
+                                        <span className="font-mono text-lg text-primary font-bold">{formatBtcPrice(resolverPrice.totalPriceSats)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <p className="text-on-surface-muted text-xs py-4">Unable to fetch pricing.</p>
+                        )}
+
+                        {/* Register button */}
+                        <Link
+                            to={`/register?domain=${domainName}&years=${regYears}`}
+                            className="btn-primary w-full text-center block py-3"
+                        >
+                            Register {domainName}.btc
+                        </Link>
+                    </div>
+                </div>
+            </PageContainer>
+        );
+    }
+
+    // --- Ready: Registered Domain ---
     return (
         <PageContainer>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in">
