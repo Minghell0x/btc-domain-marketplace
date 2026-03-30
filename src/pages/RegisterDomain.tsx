@@ -40,9 +40,6 @@ export function RegisterDomain(): ReactElement {
     const [feeRate, setFeeRate] = useState<bigint>(500n);
     const [pricingLoading, setPricingLoading] = useState(false);
 
-    // Step state
-    const [step, setStep] = useState<1 | 2 | 3>(1);
-
     // Payment state
     const [paymentPath, setPaymentPath] = useState<PaymentPath>('btc');
     const [btcStep, setBtcStep] = useState<BtcStep>('idle');
@@ -75,13 +72,12 @@ export function RegisterDomain(): ReactElement {
                 setSearchStatus('taken');
             } else {
                 setSearchStatus('available');
-                setStep(2);
+                // Fetch pricing
                 await loadPricing(cleaned, years);
             }
         } catch {
             // If lookup fails, domain might not exist (available)
             setSearchStatus('available');
-            setStep(2);
             await loadPricing(cleaned, years);
         }
     }, [searchInput, isReady, years]);
@@ -366,7 +362,7 @@ export function RegisterDomain(): ReactElement {
                             ) : null}
 
                             {/* Payment type toggle */}
-                            <div className="mb-6">
+                            <div className="mb-4">
                                 <p className="text-on-surface-muted text-xs mb-3">Payment Method</p>
                                 <div className="flex rounded-full border border-outline overflow-hidden w-fit">
                                     <button
@@ -391,21 +387,11 @@ export function RegisterDomain(): ReactElement {
                                     </button>
                                 </div>
                             </div>
-
-                            {/* Proceed button */}
-                            {pricing && (
-                                <button
-                                    onClick={() => setStep(3)}
-                                    className="btn-primary w-full text-center py-3 text-sm"
-                                >
-                                    Proceed to Registration
-                                </button>
-                            )}
                         </div>
                     )}
 
                     {/* Step 3: Registration Steps */}
-                    {step === 3 && searchStatus === 'available' && pricing && !isRegistrationComplete && (
+                    {searchStatus === 'available' && pricing && !isRegistrationComplete && (
                         <div className="card p-6 mb-6 glow-border">
                             <h2 className="label mb-4">Step 3: Register</h2>
 
